@@ -1,37 +1,23 @@
 import SocketIOClient from '../lib/communication/SocketIOClient';
+import { configureListeners } from '../SocketIO/configSocketIO'
 
-export const comandoFrenteReto = () => {
-  SocketIOClient.getInstance().emit('frenteReto');
+export const indexInputChange = ({ prop, value }) => {
+  return {
+    type: 'INPUT_CHANGE',
+    payload: { prop, value }
+  }
+};
+
+export const doConnectSocketIO = (url) => {
+  SocketIOClient.getInstance().connect(url, configureListeners);
+  return {
+    type: 'TRYING_SOCKETIO',
+  }
 }
 
-export const comandoFrenteEsquerda = () => {
-  SocketIOClient.getInstance().emit('frenteEsquerda');
-}
-
-export const comandoFrenteDireita = () => {
-  SocketIOClient.getInstance().emit('frenteDireita');
-}
-
-export const comandoReversoReto = () => {
-  SocketIOClient.getInstance().emit('reversoReto');
-}
-
-export const comandoReversoEsquerda = () => {
-  SocketIOClient.getInstance().emit('reversoEsquerda');
-}
-
-export const comandoReversoDireita = () => {
-  SocketIOClient.getInstance().emit('reversoDireita');
-}
-
-export const comandoEsquerda = () => {
-  SocketIOClient.getInstance().emit('esquerda');
-}
-
-export const comandoDireita = () => {
-  SocketIOClient.getInstance().emit('direita');  
-}
-
-export const comandoParadoTotal = () => {
-  SocketIOClient.getInstance().emit('paradoTotal');
+export const setSocketIOConnected = (value) => {
+  return {
+    type: 'STATUS_SOCKETIO_CONNECTION',
+    payload: value
+  }
 }

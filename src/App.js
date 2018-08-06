@@ -5,17 +5,24 @@ import ReduxThunk from 'redux-thunk';
 
 import reducers from './Reducer';
 import Routes from './Routes';
+
+import { setDefault } from './SocketIO/configSocketIO';
  
 class App extends Component {
 
-  render() {
-    const store = createStore(
+  constructor(props) {
+    super(props);
+    this.store = createStore(
       reducers,
       {},
       applyMiddleware(ReduxThunk)
-    )
+    );
+    setDefault(this.store.dispatch, this.store.getState);
+  }
+
+  render() {    
     return (
-      <Provider store={store}>
+      <Provider store={this.store}>
         <Routes />
       </Provider>
     );

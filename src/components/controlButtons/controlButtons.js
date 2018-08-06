@@ -17,10 +17,8 @@ class Index extends Component {
       actionLeft,
       actionRight
       } = this.props;
-    console.log(this.props);
-    
     return(
-        <View style = {{ height: '50%', flexDirection: 'column' }}>
+        <View style = {{ flex: 1, height: '50%', flexDirection: 'column' }}>
           <View style = { styles.MainContainer }>
             <View style={{
                 flex: 1,
@@ -97,14 +95,14 @@ class Index extends Component {
  
 const styles = StyleSheet.create(
 {
-    MainContainer:
-    {
-        flex: 1,
-        flexDirection: 'row',
-        //alignItems: 'center',
-        justifyContent: 'center',
-        paddingTop: 0//( Platform.OS === 'ios' ) ? 20 : 0
-    }
+  MainContainer:
+  {
+    flex: 1,
+    flexDirection: 'row',
+    //alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 0//( Platform.OS === 'ios' ) ? 20 : 0
+  }
 });
 
 export default Index;
