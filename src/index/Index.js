@@ -9,7 +9,8 @@ import { Input, Button, Card, CardSection } from '../components/common';
 
 import { 
   indexInputChange,
-  doConnectSocketIO
+  doConnectSocketIO,
+  doDisconnectSocketIO
   } from './IndexActions';
 
 class Index extends Component {
@@ -18,8 +19,10 @@ class Index extends Component {
     super(props);
   }
 
-  doConnectSocketIO() {
-    if (this.props.ipCarrinho != '') {
+  doConnectOrDiscconectSocketIO() {
+    if (this.props.isSocketConnected) {
+      this.props.doDisconnectSocketIO();
+    } else if (this.props.ipCarrinho != '') {
       this.props.doConnectSocketIO(this.props.ipCarrinho);
     }
   }
@@ -33,29 +36,31 @@ class Index extends Component {
         >
         <CardSection>
           <Input
+            autoCapitalize='none'
             value={ipCarrinho}
             label='Ip do Carrinho:'
             placeholder='Ex: http://10.0.0.49:8080'
             onChangeText={value => indexInputChange({ prop: 'ipCarrinho', value })}
             />
         </CardSection>
-        <CardSection>
-        <Text>
-          {isSocketConnected ? 'Conectado' : 'Desconectado'}
-        </Text>
+        <CardSection style={{ justifyContent: 'center' }}>
+          <Text 
+            style={styles.textStatus}>
+            Status: {isSocketConnected ? 'Conectado' : 'Desconectado'}
+          </Text>
         </CardSection>
         <CardSection>
-        <Button
-          onPress={this.doConnectSocketIO.bind(this)}>
-          {isSocketConnected ? 'Desconectar' : 'Conectar'}
-        </Button>
+          <Button
+            onPress={this.doConnectOrDiscconectSocketIO.bind(this)}>
+            {isSocketConnected ? 'Desconectar' : 'Conectar'}
+          </Button>
         </CardSection>
         <CardSection>
-        <Button
-          enabled={isSocketConnected}
-          onPress={() => Actions.controleCarrinho()}>
-          Controle
-        </Button>
+          <Button
+            disabled={!isSocketConnected}
+            onPress={() => Actions.controleCarrinho()}>
+            Controle
+          </Button>
         </CardSection>
       </Card>
     );
@@ -64,7 +69,6 @@ class Index extends Component {
 
 const styles = {
   containerStyle: {
-      // flex: 1,
       borderWidth: 1,
       borderRadius: 2,
       borderColor: '#ddd',
@@ -77,6 +81,10 @@ const styles = {
       marginLeft: 5,
       marginRight: 5,
       marginTop: 10
+  },
+  textStatus: {
+    fontSize: 20,
+    fontWeight: '600',
   }
 };
 
@@ -90,7 +98,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = dispatch => bindActionCreators({
   indexInputChange,
-  doConnectSocketIO
+  doConnectSocketIO,
+  doDisconnectSocketIO
   }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

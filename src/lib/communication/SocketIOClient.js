@@ -34,8 +34,8 @@ export default class SocketIOClient {
 
   disconnect() {
     if (this.socket && this.socket.connected) {
-      this.socket.removeAllListeners();
       this.socket.disconnect();
+      this.socket.removeAllListeners();
     }
   }
 

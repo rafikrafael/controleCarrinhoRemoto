@@ -11,7 +11,14 @@ export const indexInputChange = ({ prop, value }) => {
 export const doConnectSocketIO = (url) => {
   SocketIOClient.getInstance().connect(url, configureListeners);
   return {
-    type: 'TRYING_SOCKETIO',
+    type: 'TRYING_CONNECT_SOCKETIO',
+  }
+}
+
+export const doDisconnectSocketIO = (url) => {
+  SocketIOClient.getInstance().disconnect();
+  return {
+    type: 'TRYING_DISCONNECT_SOCKETIO',
   }
 }
 

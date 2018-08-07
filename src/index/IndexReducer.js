@@ -1,4 +1,4 @@
-const INITIAL_STATE = {ipCarrinho: '', isSocketConnected: false};
+const INITIAL_STATE = {ipCarrinho: 'http://:8080', isSocketConnected: false};
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {

@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
-import { View, Text, Platform, StyleSheet } from 'react-native';
-
-import { Button } from '../common';
+import { View, TouchableWithoutFeedback, StyleSheet, ImageBackground } from 'react-native';
 
 class Index extends Component {
+
+  executeAction(action) {
+    clearInterval();
+    action();
+    this.interval = setInterval(() => {
+      action();
+    }, 1000);
+  }
+
+  clearInterval() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  }
 
   render() {
     const { 
@@ -18,77 +30,189 @@ class Index extends Component {
       actionRight
       } = this.props;
     return(
-        <View style = {{ flex: 1, height: '50%', flexDirection: 'column' }}>
-          <View style = { styles.MainContainer }>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={() => actionLeftFoward()}>Esquerda Frente</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionFoward}>Frente</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionRightFoward}>Direita Frente</Button>
-            </View>
+      <View style = {{  
+        height: '80%', 
+        width: '80%', 
+        flexDirection: 'column', 
+        justifyContent: 'center',
+        alignSelf:'center',
+        paddingTop: 10
+        }}>
+        <View style = { styles.MainContainer }>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionLeftFoward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%' }}
+
+                source={require('../../assets/images/if_arrow_up_left.png')}
+                />
+            </TouchableWithoutFeedback>
           </View>
-          <View style = { styles.MainContainer }>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionLeft}>Esquerda</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionStopAll}>Forçar Parada</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionRight}>Direita</Button>
-            </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionFoward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_up.png')}
+                />
+            </TouchableWithoutFeedback>
           </View>
-          <View style = { styles.MainContainer }>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionLeftBackward}>Esquerda Ré</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionBackward}>Ré</Button>
-            </View>
-            <View style={{
-                flex: 1,
-                justifyContent: 'center', 
-                alignItems: 'center'
-              }}>
-              <Button onPress={actionRightBackward}>Direita Ré</Button>
-            </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionRightFoward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_up_right.png')}
+                />
+            </TouchableWithoutFeedback>
           </View>
         </View>
+        <View style = { styles.MainContainer }>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPress={() => actionLeft()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_left.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPress={() => actionStopAll()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_cancel.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPress={() => actionRight()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_right.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+        </View>
+        <View style = { styles.MainContainer }>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionLeftBackward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_down_left.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionBackward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                height: '100%', width: '100%'  }}
+
+                source={require('../../assets/images/if_arrow_down.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+          <View style={{
+              flex: 1,
+              justifyContent: 'center', 
+              alignItems: 'center'
+            }}>
+            <TouchableWithoutFeedback 
+              style={ styles.Button }
+              onPressIn={() => this.executeAction(actionRightBackward)}
+              onPressOut={() => this.clearInterval()}>
+              <ImageBackground 
+                resizeMode="center"
+                resizeMethod="scale"
+                style={{ 
+                  height: '100%', width: '100%', top: 0, position: 'absolute'
+                }}
+                source={require('../../assets/images/if_arrow_down_right.png')}
+                />
+            </TouchableWithoutFeedback>
+          </View>
+        </View>
+      </View>
     );
   }
 }
@@ -99,9 +223,11 @@ const styles = StyleSheet.create(
   {
     flex: 1,
     flexDirection: 'row',
-    //alignItems: 'center',
-    justifyContent: 'center',
     paddingTop: 0//( Platform.OS === 'ios' ) ? 20 : 0
+  },
+  Button: {
+    flex: 1,
+    alignSelf: 'stretch',
   }
 });
 
