@@ -23,6 +23,7 @@ class Controles extends Component {
     return (
       <View style={{ flex: 1 }}>
         <ControlButtons
+          tempoReenviarComando={this.props.tempoReenviarComando}
           actionFoward={comandoFrenteReto}
           actionBackward={comandoReversoReto}
           actionRightFoward={comandoFrenteDireita}
@@ -39,7 +40,9 @@ class Controles extends Component {
 }
 
 const mapStateToProps = (state) => {
+  const { tempoReenviarComando } = state.controles;
   return ({
+    tempoReenviarComando
   });
 }
 

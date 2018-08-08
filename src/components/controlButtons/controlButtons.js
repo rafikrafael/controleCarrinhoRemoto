@@ -4,11 +4,12 @@ import { View, TouchableWithoutFeedback, StyleSheet, ImageBackground } from 'rea
 class Index extends Component {
 
   executeAction(action) {
+    const tempoReenviarComando = this.props.tempoReenviarComando || 70;
     clearInterval();
     action();
     this.interval = setInterval(() => {
       action();
-    }, 1000);
+    }, tempoReenviarComando);
   }
 
   clearInterval() {
@@ -105,7 +106,8 @@ class Index extends Component {
             }}>
             <TouchableWithoutFeedback 
               style={ styles.Button }
-              onPress={() => actionLeft()}>
+              onPressIn={() => this.executeAction(actionLeft)}
+              onPressOut={() => this.clearInterval()}>
               <ImageBackground 
                 resizeMode="center"
                 resizeMethod="scale"
@@ -141,7 +143,8 @@ class Index extends Component {
             }}>
             <TouchableWithoutFeedback 
               style={ styles.Button }
-              onPress={() => actionRight()}>
+              onPressIn={() => this.executeAction(actionRight)}
+              onPressOut={() => this.clearInterval()}>
               <ImageBackground 
                 resizeMode="center"
                 resizeMethod="scale"

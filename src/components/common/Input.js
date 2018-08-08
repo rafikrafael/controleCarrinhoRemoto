@@ -40,6 +40,7 @@ const styles = {
     fontSize: 16,
     paddingLeft: 0,
     flexWrap: 'wrap',
+    alignItems: 'center',
     fontWeight: '600',
     flex: 1,
   },

@@ -35,3 +35,12 @@ export const comandoDireita = () => {
 export const comandoParadoTotal = () => {
   SocketIOClient.getInstance().emit('paradoTotal');
 }
+
+export const setTempoReenviarComando = (tempo) => {
+  console.log('tempo', tempo);
+  
+  return {
+    type: 'SET_TEMPO_REENVIAR_COMANDOS',
+    payload: tempo
+  }
+}
